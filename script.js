@@ -124,26 +124,28 @@ let divCol54=createDomMani("div","class=col-5");
 divCol54.append(label4Element,input4Element);
 let divGender=createDomMani("div","Gender");
 let label5Element=createDomMani("label","for=gender","Male");
-let input5Element=createDomMani("input","type=radio","id=gender","value=male","name=gender");
+let input5Element=createDomMani("input","type=radio","id=gender","value=Male","name=gender","onchange=getValue(this)");
 let label6Element=createDomMani("label","for=gender","Female");
-let input6Element=createDomMani("input","type=radio","id=gender","value=female","name=gender");
+let input6Element=createDomMani("input","type=radio","id=gender","value=Female","name=gender","onchange=getValue(this,1)");
 let divCol55=createDomMani("div","class=col-5");
 divCol55.append(divGender,label5Element,input5Element,label6Element,input6Element);
 let divRow3=createDomMani("div","class=row");
 divRow3.append(divCol54,divCol55);
+//divCol55.addEventListener("mouseleave",mouseLeaveEvent);
+//divCol55.addEventListener("mouseenter",mouseEnterEvent);
 
 
 let label7Element=createDomMani("label","for=choiceOfFood","Choice of food  ");
 let label7Element1=createDomMani("label","for=choiceOfFood"," Idli:");
-let input7Element1=createDomMani("input","type=checkbox","id=idli","name=idli", "value=Idli");
+let input7Element1=createDomMani("input","type=checkbox","id=idli","name=idli", "value=Idli","onchange=getValueCheckbox(this)");
 let label7Element2=createDomMani("label","for=choiceOfFood","Upma:");
-let input7Element2=createDomMani("input","type=checkbox","id=upma","name=upma", "value=Upma");
+let input7Element2=createDomMani("input","type=checkbox","id=upma","name=upma", "value=Upma","onchange=getValueCheckbox(this)");
 let label7Element3=createDomMani("label","for=choiceOfFood","Dosa:");
-let input7Element3=createDomMani("input","type=checkbox","id=dosa","name=dosa", "value=Dosa");
+let input7Element3=createDomMani("input","type=checkbox","id=dosa","name=dosa", "value=Dosa","onchange=getValueCheckbox(this)");
 let label7Element4=createDomMani("label","for=choiceOfFood","Pongal:");
-let input7Element4=createDomMani("input","type=checkbox","id=pongal","name=pongal", "value=Pongal");
+let input7Element4=createDomMani("input","type=checkbox","id=pongal","name=pongal", "value=Pongal","onchange=getValueCheckbox(this)");
 let label7Element5=createDomMani("label","for=choiceOfFood","Palav:");
-let input7Element5=createDomMani("input","type=checkbox","id=palav","name=palav", "value=Palav");
+let input7Element5=createDomMani("input","type=checkbox","id=palav","name=palav", "value=Palav","onchange=getValueCheckbox(this)");
 let divCol56=createDomMani("div","class=col-8");
 divCol56.append(label7Element,label7Element1,input7Element1,label7Element2,input7Element2,label7Element3,input7Element3,label7Element4,input7Element4,label7Element5,input7Element5);
 let divRow4=createDomMani("div","class=row");
@@ -176,6 +178,41 @@ tableElement.append(tHeadElement,tBodyElement);
 formGroupElement.append(divRow1,divRow2,divRow3,divRow4,divRow5);
 formElement.append(formGroupElement);
 divContainer.append(tableElement,formElement);
+
+/*let flag=0;
+function mouseEnterEvent(e){
+    flag=1;
+}
+function mouseLeaveEvent(e){
+  if(flag){
+    console
+  }
+}*/
+
+function getValue(radio){
+  
+  document.getElementById("gender").textContent=radio.value;
+}
+let choiceOfFood={};
+function getValueCheckbox(checkbox){
+  console.log(checkbox.value);
+  console.log(checkbox.checked);
+  if(checkbox.checked){
+   choiceOfFood[checkbox.value]=1;
+  }
+  else{
+    choiceOfFood[checkbox.value]=0;
+  }
+  document.getElementById("choiceoffood").textContent="";
+  for (const i in choiceOfFood){
+    if(choiceOfFood[i]===1){
+      document.getElementById("choiceoffood").textContent+=i+" ";
+    }
+     
+  }
+  
+}
+
 
 function textToDisplay(string1){
   document.getElementById(`${string1}`).textContent=document.getElementById(`${string1}Input`).value;
